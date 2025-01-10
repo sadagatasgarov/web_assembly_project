@@ -1,1 +1,2 @@
 login = Giris
+signin = Kayit

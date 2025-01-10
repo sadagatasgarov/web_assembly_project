@@ -26,7 +26,7 @@ fn right_nav() -> impl Element {
         .s(Gap::new().x(10))   
         .s(Align::new().right())
         .item(
-            Link::new().label("Sign in").to("/signin")
+            Link::new().label_signal(t!("signin")).to("/signin")
         )
         .item(
             Link::new().label_signal(t!("login")).to("/login")
