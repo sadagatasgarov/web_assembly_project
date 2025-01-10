@@ -805,6 +805,7 @@ name = "frontend"
 version = "0.1.0"
 dependencies = [
  "fluent",
+ "serde",
  "unic-langid",
  "zoon",
 ]

@@ -8,3 +8,6 @@ publish.workspace = true
 zoon.workspace = true
 fluent = {version = "0.16.0", features =["fluent-pseudo"]}
 unic-langid = {version = "0.9.1", features = ["unic-langid-macros"]}
+serde = {version ="*", features = ["derive"]}
+
+#ders3 04.58
