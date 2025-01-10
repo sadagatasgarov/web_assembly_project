@@ -1,5 +1,5 @@
 use zoon::*;
-use crate::i18n::t;
+use crate::i18n::{self, lang, t, Lang};
 
 pub fn root() -> impl Element {
     Column::new()
@@ -11,14 +11,38 @@ pub fn root() -> impl Element {
 
 fn left_nav() -> impl Element {
     Row::new()
-    .s(Align::new().left())
-    .item(Link::new().label("Əsas səhifə").to("/"))
+    //.s(Align::new().left())
+    .item(
+        Link::new().label("Əsas_səhifə").to("/")
+    )
 }
 
 fn right_nav() -> impl Element {
     Row::new()
+    .s(Gap::new().x(20))
+    .item(lang_label())
+    .item(
+        Row::new()
+        .s(Gap::new().x(10))   
         .s(Align::new().right())
-        .s(Gap::new().x(10))
-        .item(Link::new().label("Sign in").to("/signin"))
-        .item(Link::new().label_signal(t!("login")).to("/login"))
+        .item(
+            Link::new().label("Sign in").to("/signin")
+        )
+        .item(
+            Link::new().label_signal(t!("login")).to("/login")
+        )
+    )
+}
+
+
+
+
+fn lang_label() -> impl Element {
+    Button::new()
+    .label_signal(
+        lang()
+        .signal_ref(|l| {
+            Label::new().label(l.label())
+    })).on_press(i18n::change_locale)
+
 }
