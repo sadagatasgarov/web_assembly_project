@@ -1,5 +1,6 @@
 use crate::{*};
 use std::collections::VecDeque;
+use app::Pages;
 use zoon::{println, *};
 
 // ------ route_history ------
@@ -37,7 +38,6 @@ pub fn router() -> &'static Router<Route> {
             }
             None => {
                 Route::Home
-                //return app::set_page_id(PageId::Unknown);
             }
         };
 
@@ -46,18 +46,16 @@ pub fn router() -> &'static Router<Route> {
                 if app::is_user_logged() {
                     return router().replace(Route::Home);
                 }
-                //app::set_page_id(PageId::Login);
+                app::set_page_id(Pages::Login);
             }
 
             Route::Signin => {
                 if app::is_user_logged() {
                     return router().replace(Route::Home);
                 }
-                //app::set_page_id(PageId::Login);
+                app::set_page_id(Pages::Signin);
             }
             
-
-
             // Route::ClientsAndProjects => {
             //     if not(app::is_user_logged()) {
             //         return router().replace(Route::Login);
@@ -68,7 +66,7 @@ pub fn router() -> &'static Router<Route> {
 
             Route::Home => {
                 //return router().replace(Route::Home);
-                //app::set_page_id(PageId::Home);
+                app::set_page_id(Pages::Home);
             }
 
         }

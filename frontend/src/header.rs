@@ -25,18 +25,21 @@ fn right_nav() -> impl Element {
         app::login_user().signal_ref(|user| 
         match user {
             //Some(u)=> Link::new().label(*u.first_name),
-            Some(u)=> Row::new().item(Link::new().label("A").to("/user/1")),
+            Some(u)=> Row::new()
+            .item(
+                Link::new().label("A").to("/user/1")
+            ),
             None => Row::new()
-        .s(Gap::new().x(10))   
-        .s(Align::new().right())
-        .item(
-            Link::new().label_signal(t!("signin")).to(Route::Signin)
-        )
-        .item(
-            Link::new().label_signal(t!("login")).to(Route::Home)
-        )
+            .s(Gap::new().x(10))   
+            .s(Align::new().right())
+            .item(
+                Link::new().label_signal(t!("signin")).to(Route::Signin)
+            )
+            .item(
+                Link::new().label_signal(t!("login")).to(Route::Home)
+            )
 
-    })
+        })
     )
 }
 
