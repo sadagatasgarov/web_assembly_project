@@ -1,6 +1,6 @@
-use crate::{*};
-use std::collections::VecDeque;
+use crate::*;
 use app::Pages;
+use std::collections::VecDeque;
 use zoon::{println, *};
 
 // ------ route_history ------
@@ -36,9 +36,7 @@ pub fn router() -> &'static Router<Route> {
                 push_to_route_history(route.clone());
                 route
             }
-            None => {
-                Route::Home
-            }
+            None => Route::Home,
         };
 
         match route {
@@ -55,7 +53,7 @@ pub fn router() -> &'static Router<Route> {
                 }
                 app::set_page_id(Pages::Signin);
             }
-            
+
             // Route::ClientsAndProjects => {
             //     if not(app::is_user_logged()) {
             //         return router().replace(Route::Login);
@@ -63,12 +61,10 @@ pub fn router() -> &'static Router<Route> {
             //     clients_and_projects_page::request_clients();
             //     app::set_page_id(PageId::ClientsAndProjects);
             // }
-
             Route::Home => {
                 //return router().replace(Route::Home);
                 app::set_page_id(Pages::Home);
             }
-
         }
     })
 }
@@ -85,6 +81,5 @@ pub enum Route {
     Signin,
 
     #[route("/")]
-    Home
-
+    Home,
 }

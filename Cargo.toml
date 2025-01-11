@@ -13,5 +13,5 @@ publish = false
 
 [workspace.dependencies]
 moon = { git = "https://github.com/MoonZoon/MoonZoon", branch = "main" }
-zoon = { git = "https://github.com/MoonZoon/MoonZoon", branch = "main" }
+zoon = { git = "https://github.com/MoonZoon/MoonZoon", branch = "main"}
 

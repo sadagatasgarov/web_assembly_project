@@ -1,11 +1,9 @@
-use zoon::*;
 use crate::header;
-use serde::{Serialize, Deserialize};
-
+use serde::{Deserialize, Serialize};
+use zoon::*;
 
 mod view;
 pub static LANG_STORAGE_KEY: &str = "tr";
-
 
 pub fn root() -> impl Element {
     Column::new()
@@ -14,13 +12,12 @@ pub fn root() -> impl Element {
         .item(view::root())
 }
 
-
 #[derive(Debug, Serialize, Deserialize, Clone)]
 pub struct User {
     id: i32,
     pub first_name: String,
     pub last_name: String,
-    pub email: String
+    pub email: String,
 }
 
 // impl User {
@@ -29,12 +26,9 @@ pub struct User {
 //     }
 // }
 
-
-
 #[static_ref]
 pub fn login_user() -> &'static Mutable<Option<User>> {
     Mutable::new(None)
-    
 }
 
 #[static_ref]
@@ -46,22 +40,20 @@ fn logged_user() -> impl Signal<Item = Option<User>> {
     login_user().signal_cloned()
 }
 
-
 pub fn is_user_logged() -> bool {
     if let Some(_) = login_user().get_cloned() {
-        return true
+        return true;
     }
 
     false
 }
-
 
 #[derive(Debug, Clone)]
 pub enum Pages {
     Home,
     Login,
     Signin,
-    NotFound
+    NotFound,
 }
 
 pub fn set_page_id(page: Pages) {

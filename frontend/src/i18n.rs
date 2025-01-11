@@ -3,7 +3,6 @@ use std::collections::BTreeMap;
 use unic_langid::{langid, LanguageIdentifier};
 use zoon::{eprintln, *};
 
-
 // @TODO generalize and move to Zoon?
 // @TODO translation lists compile-time / lazy loading?
 // @TODO make it typed?
@@ -24,12 +23,11 @@ pub enum Lang {
     Tr,
 }
 
-
-impl Lang{
-    pub fn label(self)->&'static str{
-        match self{
+impl Lang {
+    pub fn label(self) -> &'static str {
+        match self {
             Lang::En => "En",
-            Lang::Tr => "Tr"
+            Lang::Tr => "Tr",
         }
     }
 }
@@ -114,11 +112,9 @@ pub fn translate(
         .map(move |lang| translate_with_lang(lang, &key, args.as_ref()))
 }
 
-
 pub fn translate_static(key: impl IntoCowStr<'static>, args: Option<TranslationArgs>) -> String {
     translate_with_lang(lang().get(), &key.into_cow_str(), args.as_ref())
 }
-
 
 fn translate_with_lang(lang: Lang, key: &str, args: Option<&TranslationArgs>) -> String {
     let translation_list = translation_lists()
@@ -160,7 +156,6 @@ macro_rules! t {
 }
 pub(crate) use t;
 
-
 macro_rules! t_s {
     ($key:expr) => {
         $crate::i18n::translate_static($key, None)
@@ -175,13 +170,10 @@ macro_rules! t_s {
 }
 pub(crate) use t_s;
 
-
-pub fn change_locale(){
-    lang().update_mut(|l|
-        match l{
+pub fn change_locale() {
+    lang().update_mut(|l| match l {
         Lang::En => *l = Lang::Tr,
-        Lang::Tr => *l = Lang::En
-    }
-    )
+        Lang::Tr => *l = Lang::En,
+    })
     //lang().set(Lang::En)
 }
