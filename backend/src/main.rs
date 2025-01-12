@@ -3,28 +3,7 @@ use moon::*;
 async fn frontend() -> Frontend {
     Frontend::new()
         .title("New Project")
-        .append_to_head(include_str!("../favicon.html")) // realfavicongenerator.net
-        .append_to_head(
-            "
-            <style>
-                html {
-                    background-color: black;
-                    color: lightgray;
-                }
-                
-                #app * {
-                    padding: 5px;
-                }
-                    
-                .button {
-                    background-color: darkgreen;
-                }
-                
-                .button:hover {
-                    background-color: green;
-                }
-            </style>",
-        )
+
 }
 
 async fn up_msg_handler(_: UpMsgRequest<()>) {}

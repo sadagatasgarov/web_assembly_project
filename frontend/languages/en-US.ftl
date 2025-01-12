@@ -1,6 +1,7 @@
 login = Log in
 signin = Sign in
-
+tr = Tr
+en = En
 
 
 # Home page

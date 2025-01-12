@@ -1,7 +1,7 @@
 login = Giris
 signin = Kayit
 
-tr = tr
+tr = Tr
 en = En
 turkish = Turkçe
 english = İngilizce
