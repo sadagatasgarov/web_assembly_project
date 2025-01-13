@@ -20,11 +20,11 @@ pub struct User {
     pub email: String,
 }
 
-// impl User {
-//     pub fn name<'a>(&'a self)  -> &'a str {
-//         format!("{} {}", self.first_name, self.last_name).as_str()
-//     }
-// }
+impl User {
+    pub fn name<'a>(&'a self)  -> String {
+        format!("{} {}", self.first_name, self.last_name)
+    }
+}
 
 #[static_ref]
 pub fn login_user() -> &'static Mutable<Option<User>> {
@@ -59,3 +59,11 @@ pub enum Pages {
 pub fn set_page_id(page: Pages) {
     pages().set(page);
 }
+
+
+pub fn load_logged_user() {
+    if let Some(Ok(user)) = local_storage().get("user") {
+        login_user().set(Some(user));
+    }
+}
+
