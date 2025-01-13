@@ -24,15 +24,19 @@ fn right_nav() -> impl Element {
             match user {
                 //Some(u)=> Link::new().label(*u.first_name),
                 Some(u) => {
-                    Row::new().item(Link::new().label(u.name()).to("/user/1"))}
-                None => Row::new()
+                    Row::new().item(Link::new().label(&u.name()).to(Route::Logout))
+                }
+                None => {
+                    Row::new()
                     .s(Gap::new().x(10))
                     .s(Align::new().right())
                     .item(Link::new().label_signal(t!("signin")).to(Route::Signin))
-                    .item(Link::new().label_signal(t!("login")).to(Route::Login)),
+                    .item(Link::new().label_signal(t!("login")).to(Route::Login))
+                }
             }
         }))
 }
+
 
 fn lang_label() -> impl Element {
     Button::new()

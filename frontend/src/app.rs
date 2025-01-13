@@ -53,6 +53,7 @@ pub enum Pages {
     Home,
     Login,
     Signin,
+    Logout,
     NotFound,
 }
 
@@ -66,4 +67,5 @@ pub fn load_logged_user() {
         login_user().set(Some(user));
     }
 }
+
 

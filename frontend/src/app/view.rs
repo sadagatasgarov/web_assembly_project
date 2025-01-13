@@ -88,5 +88,10 @@ fn login() {
     };
     app::login_user().set(Some(user.clone()));
     local_storage().insert("user", &user).expect("Session could not insert");
+
     router().replace(Route::Home);
+}
+
+fn logout() {
+    local_storage().clear();
 }
