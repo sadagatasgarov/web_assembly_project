@@ -3,6 +3,9 @@ use serde::{Deserialize, Serialize};
 use zoon::*;
 
 mod view;
+mod signing;
+
+
 pub static LANG_STORAGE_KEY: &str = "tr";
 
 pub fn root() -> impl Element {
@@ -30,6 +33,10 @@ impl User {
 pub fn login_user() -> &'static Mutable<Option<User>> {
     Mutable::new(None)
 }
+
+
+
+
 
 #[static_ref]
 pub fn pages() -> &'static Mutable<Pages> {
@@ -67,5 +74,7 @@ pub fn load_logged_user() {
         login_user().set(Some(user));
     }
 }
+
+
 
 

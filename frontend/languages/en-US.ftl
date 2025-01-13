@@ -11,3 +11,14 @@ libredu-information = Libredu is a collection softvare for schools like timrtavl
 #Login page
 email = E-mail
 password = Password
+
+
+
+
+
+
+
+#Sigin in page
+first_name = First name
+last_name = Last name
+password-again = Oassword(repeat)

@@ -54,10 +54,12 @@ pub fn router() -> &'static Router<Route> {
 
             Route::Logout => {
                 app::login_user().set(None);
+                local_storage().remove("user");
                 return router().replace(Route::Home);
             },
 
             Route::Home => {
+                
                 app::set_page_id(Pages::Home);
             }
         }
