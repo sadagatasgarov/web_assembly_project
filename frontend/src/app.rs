@@ -12,7 +12,7 @@ pub fn root() -> impl Element {
         .item(view::root())
 }
 
-#[derive(Debug, Serialize, Deserialize, Clone)]
+#[derive(Debug, Serialize, Deserialize, Clone, Default)]
 pub struct User {
     id: i32,
     pub first_name: String,
