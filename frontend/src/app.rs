@@ -1,11 +1,10 @@
 use crate::header;
 use serde::{Deserialize, Serialize};
-use zoon::*;
+use zoon::{strum::{EnumIter, IntoEnumIterator, IntoStaticStr},*};
 
-mod view;
-mod signing;
 mod school;
-
+mod signing;
+mod view;
 
 pub static LANG_STORAGE_KEY: &str = "tr";
 
@@ -25,7 +24,7 @@ pub struct User {
 }
 
 impl User {
-    pub fn name<'a>(&'a self)  -> String {
+    pub fn name<'a>(&'a self) -> String {
         format!("{} {}", self.first_name, self.last_name)
     }
 }
@@ -34,10 +33,6 @@ impl User {
 pub fn login_user() -> &'static Mutable<Option<User>> {
     Mutable::new(None)
 }
-
-
-
-
 
 #[static_ref]
 pub fn pages() -> &'static Mutable<Pages> {
@@ -70,13 +65,8 @@ pub fn set_page_id(page: Pages) {
     pages().set(page);
 }
 
-
 pub fn load_logged_user() {
     if let Some(Ok(user)) = local_storage().get("user") {
         login_user().set(Some(user));
     }
 }
-
-
-
-

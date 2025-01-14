@@ -1,11 +1,15 @@
+use super::{
+    logged_user,
+    school::{self, add_school::add_school_page, school_page},
+    signing::signin_page,
+};
+use crate::app;
 use crate::header;
 use crate::i18n::t;
 use serde::{Deserialize, Serialize};
 use zoon::{eprintln, *};
-use crate::app;
-use super::{logged_user, school::{self, add_school::add_school_page, school_page}, signing::signin_page};
 const BLUE_5: &str = "#1E90FF"; // Replace with the actual HEX or RGB value
-const RED_5: &str = "#FF4500"; 
+const RED_5: &str = "#FF4500";
 
 pub fn root() -> impl Element {
     Column::new()
@@ -25,15 +29,16 @@ pub fn root() -> impl Element {
 fn home() -> impl Element {
     Column::new()
         .s(Align::center())
-        .item_signal(
-            logged_user().map(|user| 
-                match user {
-                    Some(_) => {  
-                        //Column::new().item(Label::new().label("Okul Ekle"));
-                        school::school_page().into_raw()
-                    }
-                    None => Label::new()
-                    .label_signal(t!("libredu-information")).into_raw(),
+        .item_signal(logged_user().map(|user| {
+            match user {
+                Some(_) => {
+                    //Column::new().item(Label::new().label("Okul Ekle"));
+                    school::school_page().into_raw()
+                }
+                None => Label::new()
+                    .label_signal(t!("libredu-information"))
+                    .into_raw(),
+            }
         }))
 }
 
@@ -66,17 +71,13 @@ fn login_page() -> impl Element {
         )
         .item(
             Button::new()
-            .s(RoundedCorners::all(20))
-            .s(Borders::all(Border::new().solid().color(BLUE_5)))
-            .s(Height::exact(30))
-            .label(
-                El::new()
-                .s(Align::center())
-                .child_signal(t!("login"))
-            )
-            .on_click(||{
-                login();
-            })
+                .s(RoundedCorners::all(20))
+                .s(Borders::all(Border::new().solid().color(BLUE_5)))
+                .s(Height::exact(30))
+                .label(El::new().s(Align::center()).child_signal(t!("login")))
+                .on_click(|| {
+                    login();
+                }),
         )
 }
 
@@ -88,10 +89,12 @@ fn login() {
         id: 0,
         first_name: "Sadagat".to_string(),
         last_name: "Asgarov".to_string(),
-        email: "sadagat.asgarov@gmail.com".to_string()
+        email: "sadagat.asgarov@gmail.com".to_string(),
     };
     app::login_user().set(Some(user.clone()));
-    local_storage().insert("user", &user).expect("Session could not insert");
+    local_storage()
+        .insert("user", &user)
+        .expect("Session could not insert");
 
     router().replace(Route::Home);
 }

@@ -1,10 +1,10 @@
 use zoon::*;
 
 mod app;
+mod elements;
 mod header;
 mod i18n;
 mod router;
-mod elements;
 
 fn main() {
     router::router();

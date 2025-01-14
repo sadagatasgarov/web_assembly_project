@@ -28,7 +28,7 @@ pub fn previous_route() -> Option<Route> {
 pub fn router() -> &'static Router<Route> {
     Router::new(|route: Option<Route>| async move {
         println!("{}", routing::url());
-        
+
         let route = match route {
             Some(route) => {
                 push_to_route_history(route.clone());
@@ -56,8 +56,7 @@ pub fn router() -> &'static Router<Route> {
                 app::login_user().set(None);
                 local_storage().remove("user");
                 return router().replace(Route::Home);
-            },
-
+            }
 
             Route::AddSchool => {
                 if app::is_user_logged() {
@@ -67,7 +66,6 @@ pub fn router() -> &'static Router<Route> {
             }
 
             Route::Home => {
-                
                 app::set_page_id(Pages::Home);
             }
         }
@@ -89,8 +87,8 @@ pub enum Route {
     Home,
 
     #[route("logout")]
-    Logout,    
+    Logout,
 
     #[route("add_school")]
-    AddSchool,    
+    AddSchool,
 }

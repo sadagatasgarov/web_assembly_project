@@ -1,9 +1,9 @@
 use crate::elements::*;
-use zoon::{println,*};
 use crate::i18n::t;
+use zoon::{println, *};
 
 const BLUE_5: &str = "#1E90FF"; // Replace with the actual HEX or RGB value
-const RED_5: &str = "#FF4500"; 
+const RED_5: &str = "#FF4500";
 
 #[static_ref]
 fn first_name() -> &'static Mutable<String> {
@@ -35,7 +35,6 @@ fn change_email(lname: String) {
     email().set(lname);
 }
 
-
 pub fn signin_page() -> impl Element {
     Column::new()
         .s(Align::center())
@@ -53,7 +52,7 @@ pub fn signin_page() -> impl Element {
                 .id("first_name")
                 .input_type(InputType::text())
                 .placeholder(Placeholder::with_signal(t!("first_name")))
-                .on_change(change_first_name)
+                .on_change(change_first_name),
         )
         .item(
             TextInput::new()
@@ -62,7 +61,7 @@ pub fn signin_page() -> impl Element {
                 .id("last_name")
                 .input_type(InputType::text())
                 .placeholder(Placeholder::with_signal(t!("last_name")))
-                .on_change(change_last_name)
+                .on_change(change_last_name),
         )
         .item(
             TextInput::new()
@@ -71,7 +70,7 @@ pub fn signin_page() -> impl Element {
                 .id("email")
                 .input_type(InputType::text())
                 .placeholder(Placeholder::with_signal(t!("email")))
-                .on_change(change_email)
+                .on_change(change_email),
         )
         .item(
             TextInput::new()
@@ -93,17 +92,13 @@ pub fn signin_page() -> impl Element {
         )
         .item(
             Button::new()
-            .s(RoundedCorners::all(20))
-            .s(Borders::all(Border::new().solid().color(BLUE_5)))
-            .s(Height::exact(30))
-            .label(
-                El::new()
-                .s(Align::center())
-                .child_signal(t!("login"))
-            )
-            .on_click(||{
-                signin();
-            })
+                .s(RoundedCorners::all(20))
+                .s(Borders::all(Border::new().solid().color(BLUE_5)))
+                .s(Height::exact(30))
+                .label(El::new().s(Align::center()).child_signal(t!("login")))
+                .on_click(|| {
+                    signin();
+                }),
         )
 }
 
@@ -116,11 +111,11 @@ fn signin() {
         id: 0,
         first_name: first_name().get_cloned(),
         last_name: last_name().get_cloned(),
-        email: email().get_cloned()
+        email: email().get_cloned(),
     };
     app::login_user().set(Some(user.clone()));
-    local_storage().insert("user", &user).expect("Session could not insert");
+    local_storage()
+        .insert("user", &user)
+        .expect("Session could not insert");
     router().replace(Route::Home);
 }
-
-
