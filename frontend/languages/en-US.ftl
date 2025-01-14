@@ -13,8 +13,16 @@ password = Password
 #Sigin in page
 first_name = First name
 last_name = Last name
-password-again = Oassword(repeat)
+password_again = Oassword(repeat)
 
 #Okul Ekleme Sayfasi
 add_school = Add School
 school_name = School Name
+
+
+#School page
+teachers = Muellimler
+classes = Sinifler
+lectures = Dersler 
+timetables = Ders Proqramlari 
+home = Ana Sayfa
