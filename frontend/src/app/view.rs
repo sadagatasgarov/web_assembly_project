@@ -3,7 +3,7 @@ use crate::i18n::t;
 use serde::{Deserialize, Serialize};
 use zoon::{eprintln, *};
 use crate::app;
-use super::{logged_user, signing::signin_page};
+use super::{logged_user, school::{self, add_school::add_school_page, school_page}, signing::signin_page};
 const BLUE_5: &str = "#1E90FF"; // Replace with the actual HEX or RGB value
 const RED_5: &str = "#FF4500"; 
 
@@ -15,6 +15,7 @@ pub fn root() -> impl Element {
                 app::Pages::Home => home().into_raw(),
                 app::Pages::Login => login_page().into_raw(),
                 app::Pages::Signin => signin_page().into_raw(),
+                app::Pages::AddSchool => add_school_page().into_raw(),
                 // app::Pages::NotFound => todo!(),
                 _ => Label::new().label(format!("{:?}", page)).into_raw(),
             }
@@ -24,10 +25,15 @@ pub fn root() -> impl Element {
 fn home() -> impl Element {
     Column::new()
         .s(Align::center())
-        .item(Label::new().label("Libredu"))
-        .item_signal(logged_user().map(|user| match user {
-            Some(_) => Column::new().item(Label::new().label("Okul Ekle")),
-            None => Column::new().item(Label::new().label_signal(t!("libredu-information"))),
+        .item_signal(
+            logged_user().map(|user| 
+                match user {
+                    Some(_) => {  
+                        //Column::new().item(Label::new().label("Okul Ekle"));
+                        school::school_page().into_raw()
+                    }
+                    None => Label::new()
+                    .label_signal(t!("libredu-information")).into_raw(),
         }))
 }
 

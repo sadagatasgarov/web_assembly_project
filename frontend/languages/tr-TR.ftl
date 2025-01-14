@@ -20,5 +20,5 @@ last_name = Soyad
 password_again = Parolu yeniden daxil edin
 
 #Okul Ekleme Sayfasi
-add_school = Okul Ekleme
+add_school = Okul Ekle
 school_name = Okul Adi
