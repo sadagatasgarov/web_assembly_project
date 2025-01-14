@@ -58,6 +58,14 @@ pub fn router() -> &'static Router<Route> {
                 return router().replace(Route::Home);
             },
 
+
+            Route::AddSchool => {
+                if app::is_user_logged() {
+                    return router().replace(Route::Home);
+                }
+                app::set_page_id(Pages::AddSchool);
+            }
+
             Route::Home => {
                 
                 app::set_page_id(Pages::Home);
@@ -82,4 +90,7 @@ pub enum Route {
 
     #[route("logout")]
     Logout,    
+
+    #[route("add_school")]
+    AddSchool,    
 }

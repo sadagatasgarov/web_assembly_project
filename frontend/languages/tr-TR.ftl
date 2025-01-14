@@ -14,9 +14,11 @@ libredu-information = Libredu okullar icin bir yazilim kumesidir, ders dagitimi 
 email = E-poct
 password = Parol
 
-
-
 #Sigin in page
 first_name = Ad
 last_name = Soyad
 password_again = Parolu yeniden daxil edin
+
+#Okul Ekleme Sayfasi
+add_school = Okul Ekleme
+school_name = Okul Adi

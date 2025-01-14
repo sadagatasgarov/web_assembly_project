@@ -4,6 +4,7 @@ use zoon::*;
 
 mod view;
 mod signing;
+mod school;
 
 
 pub static LANG_STORAGE_KEY: &str = "tr";
@@ -62,6 +63,7 @@ pub enum Pages {
     Signin,
     Logout,
     NotFound,
+    AddSchool,
 }
 
 pub fn set_page_id(page: Pages) {

@@ -119,7 +119,7 @@ fn signin() {
         email: email().get_cloned()
     };
     app::login_user().set(Some(user.clone()));
-    local_storage().insert("user", &user);
+    local_storage().insert("user", &user).expect("Session could not insert");
     router().replace(Route::Home);
 }
 
