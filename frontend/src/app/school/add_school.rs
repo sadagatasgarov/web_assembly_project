@@ -2,6 +2,8 @@ use crate::elements::*;
 use zoon::{println,*};
 use crate::i18n::t;
 
+use super::School;
+
 const BLUE_5: &str = "#1E90FF"; // Replace with the actual HEX or RGB value
 const RED_5: &str = "#FF4500"; 
 
@@ -51,6 +53,12 @@ pub fn add_school_page() -> impl Element {
 }
 
 fn add_school() {
+    super::school().set(Some(
+        School{
+            id: 0,
+            name: school_name().get_cloned()
+        }
+    ));
     //school_name().set(name);
 }
 
