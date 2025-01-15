@@ -37,7 +37,29 @@ pub struct School {
 pub fn school_pages() -> impl Element {
     El::new().child_signal(school().signal_ref(|schl| {
         match schl {
-            Some(s) => Row::new()
+            Some(s) => {
+                Column::new()
+                .item(school_tabs())
+                .item_signal(
+                    selected_page().signal_ref(|page| {
+                        match page {
+                            SchoolPages::Home => "home",
+                            SchoolPages::Classes => "classes",
+                            SchoolPages::Teachers => "teeachers",
+                            SchoolPages::Lectures => "lectures",
+                            SchoolPages::Timetabling => "timetablings",
+                        }
+                    })  
+                )
+            },
+            None => Column::new()
+            .item(Row::new().item(add_school::add_school_page())),
+        }
+    }))
+}
+
+fn school_tabs() -> impl Element {
+    Row::new()
                 .s(Gap::new().x(20))
                 .s(Font::new().weight(FontWeight::Medium))
                 .s(Borders::new().bottom(Border::new().width(0).solid().color(RED_5)))
@@ -45,26 +67,21 @@ pub fn school_pages() -> impl Element {
                     Button::new()
                         .s(Borders::new())
                         .s(Borders::new().bottom_signal(
-                            selected_page().signal_ref(move |p|
+                            selected_page().signal_ref(move |p| {
                                 if p == &page {
                                     Border::new().width(2).solid().color(BLUE_5)
                                 } else {
                                     Border::new().width(0).solid().color(RED_5)
                                 }
-                            )  
-                            // page_signal(page).map_bool(
-                            //     || Border::new().width(1).solid().color(RED_5),
-                            //     || Border::new().width(1).solid().color(BLUE_5)
-                            //     )
-                            )
-                        )
+                            }), // page_signal(page).map_bool(
+                                //     || Border::new().width(1).solid().color(RED_5),
+                                //     || Border::new().width(1).solid().color(BLUE_5)
+                                //     )
+                        ))
                         .s(Width::exact(150))
                         .on_click(move || change_page(page))
                         .label_signal(t!(page.label()))
-                })),
-            None => Row::new().item(add_school::add_school_page())
-        }
-    }))
+                }))
 }
 
 #[derive(Debug, Clone, Copy, EnumIter, IntoStaticStr, Default, PartialEq)]
