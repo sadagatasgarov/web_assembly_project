@@ -1,6 +1,6 @@
 use super::{
     logged_user,
-    school::{self, add_school::add_school_page, school_page},
+    school::{self, add_school::add_school_page, school_pages},
     signing::signin_page,
 };
 use crate::app;
@@ -33,7 +33,7 @@ fn home() -> impl Element {
             match user {
                 Some(_) => {
                     //Column::new().item(Label::new().label("Okul Ekle"));
-                    school::school_page().into_raw()
+                    school::school_pages().into_raw()
                 }
                 None => Label::new()
                     .label_signal(t!("libredu-information"))

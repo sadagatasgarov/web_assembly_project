@@ -47,8 +47,8 @@ pub fn add_school_page() -> impl Element {
 }
 
 fn add_school() {
-    use crate::router::Route;
     use crate::router::router;
+    use crate::router::Route;
     super::school().set(Some(School {
         id: 0,
         name: school_name().get_cloned(),
@@ -58,9 +58,8 @@ fn add_school() {
         .insert("school", &super::school().get_cloned())
         .expect("school add error session");
 
-        router().replace(Route::Home);
+    router().replace(Route::Home);
 }
-
 
 // pub fn load_school() {
 //     if let Some(Ok(user)) = local_storage().get("school") {

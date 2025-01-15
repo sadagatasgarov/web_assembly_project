@@ -1,6 +1,9 @@
 use crate::header;
 use serde::{Deserialize, Serialize};
-use zoon::{strum::{EnumIter, IntoEnumIterator, IntoStaticStr},*};
+use zoon::{
+    strum::{EnumIter, IntoEnumIterator, IntoStaticStr},
+    *,
+};
 
 mod school;
 mod signing;
