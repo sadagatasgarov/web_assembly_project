@@ -1,7 +1,7 @@
 pub mod add_school;
 use crate::i18n::t;
 use strum::{EnumIter, IntoEnumIterator, IntoStaticStr};
-use zoon::*;
+use zoon::{println, *};
 
 const BLUE_5: &str = "#1E90FF"; // Replace with the actual HEX or RGB value
 const RED_5: &str = "#FF4500";
@@ -19,9 +19,14 @@ fn selected_page() -> &'static Mutable<SchoolPages> {
     Mutable::new(SchoolPages::default())
 }
 
-fn page_signal(p: SchoolPages) -> impl Signal<Item = bool> {
-    Mutable::new(p == selected_page().get_cloned()).signal()
+fn change_page(p: SchoolPages) {
+    println!("aa");
+    selected_page().set(p);
 }
+
+// fn page_signal(p: SchoolPages) -> impl Signal<Item = bool> {
+//     Mutable::new(p == selected_page().get_cloned()).signal()
+// }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct School {
@@ -35,15 +40,29 @@ pub fn school_pages() -> impl Element {
             Some(s) => Row::new()
                 .s(Gap::new().x(20))
                 .s(Font::new().weight(FontWeight::Medium))
-                .s(Borders::new().bottom(Border::new().width(1).solid().color(RED_5)))
+                .s(Borders::new().bottom(Border::new().width(0).solid().color(RED_5)))
                 .items(SchoolPages::iter().map(|page| {
                     Button::new()
                         .s(Borders::new())
-                        .s(Borders::new().bottom(Border::new().width(1).solid().color(BLUE_5)))
+                        .s(Borders::new().bottom_signal(
+                            selected_page().signal_ref(move |p|
+                                if p == &page {
+                                    Border::new().width(2).solid().color(BLUE_5)
+                                } else {
+                                    Border::new().width(0).solid().color(RED_5)
+                                }
+                            )  
+                            // page_signal(page).map_bool(
+                            //     || Border::new().width(1).solid().color(RED_5),
+                            //     || Border::new().width(1).solid().color(BLUE_5)
+                            //     )
+                            )
+                        )
                         .s(Width::exact(150))
+                        .on_click(move || change_page(page))
                         .label_signal(t!(page.label()))
                 })),
-            None => Row::new().item(add_school::add_school_page()),
+            None => Row::new().item(add_school::add_school_page())
         }
     }))
 }
