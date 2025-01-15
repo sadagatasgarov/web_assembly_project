@@ -1,4 +1,11 @@
 pub mod add_school;
+pub mod classes;
+pub mod homepage;
+pub mod lectures;
+pub mod teachers;
+pub mod timetables;
+
+
 use crate::i18n::t;
 use strum::{EnumIter, IntoEnumIterator, IntoStaticStr};
 use zoon::{println, *};
@@ -43,11 +50,11 @@ pub fn school_pages() -> impl Element {
                 .item_signal(
                     selected_page().signal_ref(|page| {
                         match page {
-                            SchoolPages::Home => "home",
-                            SchoolPages::Classes => "classes",
-                            SchoolPages::Teachers => "teeachers",
-                            SchoolPages::Lectures => "lectures",
-                            SchoolPages::Timetabling => "timetablings",
+                            SchoolPages::Home => homepage::home(),
+                            SchoolPages::Classes => classes::home(),
+                            SchoolPages::Teachers => teachers::home(),
+                            SchoolPages::Lectures => lectures::home(),
+                            SchoolPages::Timetabling => timetables::home(),
                         }
                     })  
                 )
