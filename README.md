@@ -13,3 +13,13 @@ replace-with = "vendored-sources"
 
 [source.vendored-sources]
 directory = "vendor"
+
+
+
+
+
+
+
+runtime-async-std-native-tls
+sqlx = {version ="0.8.3", features = ["postgres", "runtime-tokio-rustls"]}
+
