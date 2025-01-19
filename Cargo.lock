@@ -1718,7 +1718,7 @@ dependencies = [
  "mime",
  "mime_guess",
  "moon_entry_macros",
- "moonlight",
+ "moonlight 0.1.0 (git+https://github.com/MoonZoon/MoonZoon?branch=main)",
  "once_cell",
  "parking_lot 0.12.3",
  "qrcode",
@@ -1738,6 +1738,12 @@ source = "git+https://github.com/MoonZoon/MoonZoon?branch=main#f8fc31065f65bdb3a
 dependencies = [
  "quote",
 ]
+
+[[package]]
+name = "moonlight"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "98e94365136c751cb0ceff8e009784cc270a1d9e2f47f01f438a87a746a26bb1"
 
 [[package]]
 name = "moonlight"
@@ -2479,6 +2485,9 @@ dependencies = [
 [[package]]
 name = "shared"
 version = "0.1.0"
+dependencies = [
+ "moonlight 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
+]
 
 [[package]]
 name = "shlex"
@@ -3648,7 +3657,7 @@ dependencies = [
  "hsluv",
  "js-sys",
  "lang",
- "moonlight",
+ "moonlight 0.1.0 (git+https://github.com/MoonZoon/MoonZoon?branch=main)",
  "num-traits",
  "once_cell",
  "paste",

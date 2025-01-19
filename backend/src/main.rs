@@ -3,27 +3,36 @@ use serde::{Serialize, Deserialize};
 use moon::*;
 use sqlx::{query, Executor, PgPool};
 
+mod database;
 
 async fn frontend() -> Frontend {
     Frontend::new().title("New Project")
 }
-
 async fn up_msg_handler(req: UpMsgRequest<()>) {
-        let UpMsgRequest {
-            up_msg,
-            ..
-        } = req;
+    let UpMsgRequest {
+        up_msg,
+        ..
+    } = req;
 
-        #[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
-        #[serde(crate = "serde")]
-        struct U{}
+    #[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
+    #[serde(crate = "serde")]
+    struct U{}
 
-        let _down_msg = match up_msg {
-            // ------- Auth --------
-            UpMsg::Login {
-            
+    let _down_msg = match up_msg {
+        // ------- Auth --------
+        UpMsg::Login { email, password} => {
+            if email != "test@test.test" || password != "Password" {
+                DownMsg::LoginError("sorry, invalid name or password".to_owned())
+            } else {
+                let user = User {
+                    id: EntityId::new(),
+                    name: email,
+                    auth_token: AuthToken::new("i'm auth token")
+                };
+                DownMsg::LoggedIn(user)
             }
-        };
+        }
+    };
 }
 
 
