@@ -3,12 +3,14 @@ use serde::{Serialize, Deserialize};
 use moon::*;
 use sqlx::{query, Executor, PgPool};
 
+use shared::*;
+
 mod database;
 
 async fn frontend() -> Frontend {
     Frontend::new().title("New Project")
 }
-async fn up_msg_handler(req: UpMsgRequest<()>) {
+async fn up_msg_handler(req: UpMsgRequest<UpMsg>) {
     let UpMsgRequest {
         up_msg,
         ..
@@ -16,7 +18,7 @@ async fn up_msg_handler(req: UpMsgRequest<()>) {
 
     #[derive(Debug, Serialize, Deserialize, sqlx::FromRow)]
     #[serde(crate = "serde")]
-    struct U{}
+    struct U{id: i32}
 
     let _down_msg = match up_msg {
         // ------- Auth --------

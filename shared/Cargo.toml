@@ -5,4 +5,9 @@ edition.workspace = true
 publish.workspace = true
 
 [dependencies]
-moonlight = "*"
+moonlight.workspace = true
+validator = { version = "0.12", features = ["derive", "phone"] }
+
+[features]
+frontend = ["moonlight/frontend"]
+backend = ["moonlight/backend"]

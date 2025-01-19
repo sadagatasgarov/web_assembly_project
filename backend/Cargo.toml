@@ -10,3 +10,4 @@ moon.workspace = true
 sqlx = {version ="0.8.3", features = ["postgres", "runtime-tokio-rustls"]}
 serde = {version ="*", features = ["derive"]}
 
+shared = {path = "../shared"}
