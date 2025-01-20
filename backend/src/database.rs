@@ -1,4 +1,4 @@
-use sqlx::postgres::{PgPoolOptions, PgPool, Postgres};
+use sqlx::postgres::{PgPool, Postgres};
 use sqlx::Pool;
 use moon::Lazy;
 use crate::tokio::sync::RwLock;
