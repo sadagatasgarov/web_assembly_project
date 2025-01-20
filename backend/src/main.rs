@@ -1,4 +1,5 @@
 use std::collections::HashMap;
+use database::DB;
 use serde::{Serialize, Deserialize};
 use moon::*;
 use sqlx::{query, Executor, PgPool};
@@ -23,6 +24,11 @@ async fn up_msg_handler(req: UpMsgRequest<UpMsg>) {
     let _down_msg = match up_msg {
         // ------- Auth --------
         UpMsg::Login { email, password} => {
+            let user: U = sqlx::query_as(r#"select id from users"#)
+                .bind(&email)
+                .fetch_one(&*DB.read().await)
+                .await.unwrap();
+
             if email != "test@test.test" || password != "Password" {
                 DownMsg::LoginError("sorry, invalid name or password".to_owned())
             } else {
